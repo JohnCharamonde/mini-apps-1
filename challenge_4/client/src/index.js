@@ -3,5 +3,5 @@ import ReactDOM from 'react-dom';
 import Board from './components/Board.jsx';
 
 ReactDOM.render(
-  <Board />, document.getElementById('here')
+  <Board />, document.getElementById('board')
 );
