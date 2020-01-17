@@ -15,7 +15,23 @@ class Board extends React.Component {
       }
   }
 
+  handleClick(columnHead, e) {
+    var columnCopy = Array.from(this.state.columns)
+    var targetId;
+    if(this.state.columns[columnHead][0] === 'RED' || this.state.columns[columnHead][0] === 'YELLOW') {
+      alert('This is an illegal move! Please try again!');
+    } else {
+      for(let i = this.state.columns[columnHead].length - 1; i > -1; i--) {
+        if(typeof(this.state.columns[columnHead][i]) === 'number') {
+          targetId = this.state.columns[columnHead][i];
+          columnCopy[columnHead][i] = this.state.turn;
+          break;
+        }
+      }
+    }
 
+
+  }
   // checkForWin
   // checkIfMoveIsLegal
   // tokenPlacementHandler
@@ -27,7 +43,7 @@ class Board extends React.Component {
   // tokenPlacementHandler
 
   render() {
-    let isRedTurn = this.state.turn === 'RED';
+    let isRedTurn = this.state.turn === 'RED'
     return (
       <div>
         <div style={{ fontSize: 50, color: 'white' }}>IT'S <span style={{ color: isRedTurn === true ? 'red' : 'yellow' }}>{this.state.turn}</span>'S TURN</div>
@@ -35,7 +51,7 @@ class Board extends React.Component {
           <thead>
             <tr>
               {this.state.columnHeads.map(columnHead =>
-                < ColumnHeadItem columnHead={columnHead} />
+                < ColumnHeadItem columnHead={columnHead} handleClick={this.handleClick.bind(this)}/>
               )}
             </tr>
           </thead>
